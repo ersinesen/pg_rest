@@ -38,6 +38,8 @@ In psql:
 
 ```
 CREATE FUNCTION rest_get(text) RETURNS text AS 'pg_rest.so', 'rest_get' LANGUAGE C STRICT;
+CREATE FUNCTION rest_post(text, text) RETURNS text AS 'pg_rest.so', 'rest_post' LANGUAGE C STRICT;
+CREATE FUNCTION rest_call(text, text, text) RETURNS text AS 'pg_rest.so', 'rest_call' LANGUAGE C STRICT;
 ```
 
 
@@ -45,5 +47,11 @@ CREATE FUNCTION rest_get(text) RETURNS text AS 'pg_rest.so', 'rest_get' LANGUAGE
 
 In psql:
 ```
-select rest_get('https://ersinesen.appspot.com');
+SELECT rest_get('https://ersinesen.appspot.com');
+SELECT rest_post('https://httpbin.org/post', 'HELLO');
+SELECT rest_call('DELETE', 'https://httpbin.org/delete', 'DELETE THIS');
+SELECT rest_call('PATCH', 'https://httpbin.org/patch', 'THIS IS A PATCH');
+SELECT rest_call('PUT', 'https://httpbin.org/put', 'PUT THIS');
 ```
+
+Warning: Use ' in sql command not ".
